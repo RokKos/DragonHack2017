@@ -8,7 +8,10 @@ public class box_script : MonoBehaviour {
     [SerializeField] Sprite[] images;
 
     Image myImage;
-    int stanje = 0;
+
+    public int stanje = 0;
+    public int pozicija;
+    public int parent;
 
 	// Use this for initialization
 	void Start () {
@@ -21,4 +24,9 @@ public class box_script : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void Click() {
+        // is move legal?
+        //if()
+    }
 }
