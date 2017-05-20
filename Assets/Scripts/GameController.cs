@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
     Button[] listOfBoxes;
-    Button[] cubeBoxesList;
+    public Button[] cubeBoxesList;
 
     [Range(0, 10)]
     public float scale = 3f;
@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour {
                 Button temp = Instantiate(boxPrefab, panelBoxes, false);
                 // Move into rigth postition
                 temp.transform.localScale = new Vector3(scale, scale, scale);
-                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * scale, (j - 4) * temp.GetComponent<RectTransform>().rect.width * scale, -1);
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * (scale+0.2f), (j - 4) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
                 temp.GetComponent<box_script>().stanje = 0;
                 temp.GetComponent<box_script>().pozicija = (i % 3) * 3 + (j % 3); 
                 listOfBoxes[i * 9 + j] = temp;
@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
                 for (int k = 0; k < 3; ++k) {
                     for (int l = 0; l < 3; ++l) {
                         trenutni_otroci.Add(listOfBoxes[i * 27 + j * 3 + k * 9 + l]);
+                        listOfBoxes[i * 27 + j * 3 + k * 9 + l].GetComponent<box_script>().parent = i * 3 + j;
                     }
 
                 }
@@ -77,7 +78,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        changeScale();
+        //changeScale();
 	}
 
     void changeScale () {
@@ -89,7 +90,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    bool konecIgre () {
+    public bool konecIgre () {
         // Check rows
         for (int i = 0; i < 3; ++i) {
             if (cubeBoxesList[i * 3].GetComponent<box_script>().stanje == cubeBoxesList[i * 3 + 1].GetComponent<box_script>().stanje && cubeBoxesList[i * 3].GetComponent<box_script>().stanje == cubeBoxesList[i * 3 + 2].GetComponent<box_script>().stanje) {

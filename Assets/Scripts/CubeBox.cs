@@ -25,7 +25,7 @@ public class CubeBox : MonoBehaviour {
 		
 	}
 
-    bool triVVrsto () {
+    public bool triVVrsto () {
         // Check rows
         for (int i = 0; i < 3; ++i) {
             if (otroci[i*3].GetComponent<box_script>().stanje == otroci[i * 3 + 1].GetComponent<box_script>().stanje && otroci[i * 3].GetComponent<box_script>().stanje == otroci[i * 3 + 2].GetComponent<box_script>().stanje) {
