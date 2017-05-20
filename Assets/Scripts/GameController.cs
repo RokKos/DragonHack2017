@@ -162,10 +162,12 @@ public class GameController : MonoBehaviour {
         }
         if (polje == 10) {
             for (int i = 0; i < 9; ++i) {
-                if (!firstPlayer) {
-                    gridList[i].GetComponent<Image>().color = Color.red;
-                } else {
-                    gridList[i].GetComponent<Image>().color = Color.yellow;
+                if (cubeBoxesList[i].GetComponent<CubeBox>().stanje == 0) {
+                    if (!firstPlayer) {
+                        gridList[i].GetComponent<Image>().color = Color.red;
+                    } else {
+                        gridList[i].GetComponent<Image>().color = Color.yellow;
+                    }
                 }
                 
                 //StartCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
