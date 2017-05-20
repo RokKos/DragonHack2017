@@ -134,6 +134,15 @@ public class GameController : MonoBehaviour {
     public void nextMoveHint (int polje) {
         if (prejsnjaPoteza != -1) {
             gridList[prejsnjaPoteza].GetComponent<Image>().color = Color.black;
+        } else if (prejsnjaPoteza == 10) {
+            for (int i = 0; i < 9; ++i) {
+                gridList[i].GetComponent<Image>().color = Color.black;
+            }
+        }
+        if (polje == 10) {
+            for (int i = 0; i < 9; ++i) {
+                gridList[i].GetComponent<Image>().color = Color.red;
+            }
         }
         gridList[polje].GetComponent<Image>().color = Color.red;
     }
