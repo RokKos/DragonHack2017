@@ -233,6 +233,8 @@ MonoBehaviour:
     type: 2}
   cubeBoxPrefab: {fileID: 114257097836427248, guid: 240527afdf752434890d47ecd04225ee,
     type: 2}
+  gridPrefab: {fileID: 114659963087966540, guid: c9a536462f74a0c4ab968b18bcd694d4,
+    type: 2}
   panelBoxes: {fileID: 1900274695}
   canvas: {fileID: 227433903}
   cubeBoxesList: []
