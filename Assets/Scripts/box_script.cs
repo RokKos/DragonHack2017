@@ -57,6 +57,11 @@ public class box_script : MonoBehaviour {
             Debug.Log("Zmaga v majhnem");
         }
 
+        if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().zasedenoDoKonca()) {
+            gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 3;
+            Debug.Log("Zasedeno");
+        }
+
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
             Debug.Log("Zmaga");

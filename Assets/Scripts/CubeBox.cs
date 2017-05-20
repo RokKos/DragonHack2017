@@ -13,7 +13,7 @@ public class CubeBox : MonoBehaviour {
 
     public List<Button> otroci;
     public int pozicija = -1;
-    public int stanje = 0;  // 0 - empty, 1 - player 1, 2 - player 2
+    public int stanje = 0;  // 0 - empty, 1 - player 1, 2 - player 2, 3 - zasedeno
 
 	// Use this for initialization
 	void Start () {
@@ -49,6 +49,17 @@ public class CubeBox : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public bool zasedenoDoKonca () {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (otroci[i * 3 + j].GetComponent<box_script>().stanje == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public void izpisiOtroke () {
