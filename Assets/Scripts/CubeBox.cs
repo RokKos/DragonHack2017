@@ -28,26 +28,33 @@ public class CubeBox : MonoBehaviour {
     public bool triVVrsto () {
         // Check rows
         for (int i = 0; i < 3; ++i) {
-            if (otroci[i*3].GetComponent<box_script>().stanje == otroci[i * 3 + 1].GetComponent<box_script>().stanje && otroci[i * 3].GetComponent<box_script>().stanje == otroci[i * 3 + 2].GetComponent<box_script>().stanje) {
+            if (otroci[i * 3].GetComponent<box_script>().stanje != 0 && otroci[i*3].GetComponent<box_script>().stanje == otroci[i * 3 + 1].GetComponent<box_script>().stanje && otroci[i * 3].GetComponent<box_script>().stanje == otroci[i * 3 + 2].GetComponent<box_script>().stanje) {
                 return true;
             }
         }
         // Check columns
         for (int i = 0; i < 3; ++i) {
-            if (otroci[i].GetComponent<box_script>().stanje == otroci[i + 3].GetComponent<box_script>().stanje && otroci[i].GetComponent<box_script>().stanje == otroci[i + 6].GetComponent<box_script>().stanje) {
+            if (otroci[i].GetComponent<box_script>().stanje != 0 && otroci[i].GetComponent<box_script>().stanje == otroci[i + 3].GetComponent<box_script>().stanje && otroci[i].GetComponent<box_script>().stanje == otroci[i + 6].GetComponent<box_script>().stanje) {
                 return true;
             }
         }
 
         // Check diagonals
-        if (otroci[0].GetComponent<box_script>().stanje == otroci[4].GetComponent<box_script>().stanje && otroci[0].GetComponent<box_script>().stanje == otroci[8].GetComponent<box_script>().stanje) {
+        if (otroci[0].GetComponent<box_script>().stanje != 0 && otroci[0].GetComponent<box_script>().stanje == otroci[4].GetComponent<box_script>().stanje && otroci[0].GetComponent<box_script>().stanje == otroci[8].GetComponent<box_script>().stanje) {
             return true;
         }
 
-        if (otroci[2].GetComponent<box_script>().stanje == otroci[4].GetComponent<box_script>().stanje && otroci[2].GetComponent<box_script>().stanje == otroci[6].GetComponent<box_script>().stanje) {
+        if (otroci[2].GetComponent<box_script>().stanje != 0 && otroci[2].GetComponent<box_script>().stanje == otroci[4].GetComponent<box_script>().stanje && otroci[2].GetComponent<box_script>().stanje == otroci[6].GetComponent<box_script>().stanje) {
             return true;
         }
 
         return false;
+    }
+
+    public void izpisiOtroke () {
+        for (int i = 0; i < 9; ++i) {
+            Debug.Log(i + " :" + otroci[i].GetComponent<box_script>().stanje);
+        }
+
     }
 }
