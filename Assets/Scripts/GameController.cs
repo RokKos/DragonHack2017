@@ -11,11 +11,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
     [SerializeField] Button boxPrefab;
-    [SerializeField] GameObject cubeBoxPrefab;
+    [SerializeField] Button cubeBoxPrefab;
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
     Button[] listOfBoxes;
-    GameObject[] cubeBoxesList;
+    Button[] cubeBoxesList;
 
     [Range(0, 10)]
     public float scale = 3f;
@@ -29,21 +29,16 @@ public class GameController : MonoBehaviour {
 	void Start () {
         firstPlayer = true;
         listOfBoxes = new Button[MAXBOXES];
-        cubeBoxesList = new GameObject[9];
+        cubeBoxesList = new Button[9];
         scale = 3f;
 
         // Spawning small boxes
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
-                Vector2 pos = new Vector2(i * 0.7f, j * 0.7f);  // Just temporary position
                 Button temp = Instantiate(boxPrefab, panelBoxes, false);
                 // Move into rigth postition
-                Debug.Log((i - 4) * temp.GetComponent<RectTransform>().rect.height +" " + (i - 4) * temp.GetComponent<RectTransform>().rect.width);
-                //temp.transform.position = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height, (j - 4) * temp.GetComponent<RectTransform>().rect.width, 1);
                 temp.transform.localScale = new Vector3(scale, scale, scale);
-                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * scale, (j - 4) * temp.GetComponent<RectTransform>().rect.width * scale, 1);
-                //temp.transform.SetParent(panelBoxes);
-                //new Vector3(scale * (1.0f / canvas.localScale.x), scale * (1.0f / canvas.localScale.y), 1);  //  Get the right scale
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * scale, (j - 4) * temp.GetComponent<RectTransform>().rect.width * scale, -1);
                 temp.GetComponent<box_script>().stanje = 0;
                 temp.GetComponent<box_script>().pozicija = (i % 3) * 3 + (j % 3); 
                 listOfBoxes[i * 9 + j] = temp;
@@ -51,18 +46,20 @@ public class GameController : MonoBehaviour {
         }
 
         // Spawning big boxes
-        /*
+        
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                Vector2 pos = new Vector2(i * 0.7f, j * 0.7f);  // Just temporary position
-                GameObject temp = Instantiate(cubeBoxPrefab, pos, Quaternion.identity, panelBoxes);
-                temp.transform.localScale = new Vector3(3 * scale * (1.0f / canvas.localScale.x), 3 * scale * (1.0f / canvas.localScale.y), 1);  //  Get the right scale (3 times biger than normal)
+                Button temp = Instantiate(cubeBoxPrefab, panelBoxes, false);
                 // Move into rigth postition
-                temp.transform.position = new Vector2((i - 4) * temp.GetComponent<RectTransform>().rect.height, (j - 4) * temp.GetComponent<RectTransform>().rect.width);
+                temp.transform.localScale = new Vector3(3 * scale, 3 *scale, 3 * scale);
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * scale * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * scale * 3, 1);
                 temp.GetComponent<CubeBox>().stanje = 0;
                 temp.GetComponent<CubeBox>().pozicija = i * 3 + j;
+                //temp.GetComponentInParent<GameObject>().SetActive(false);
+                //temp.interactable = false;  // This works because alpha of disable cubeBox is 0
+                temp.gameObject.SetActive(false);
 
-                List<GameObject> trenutni_otroci = new List<GameObject>();
+                List<Button> trenutni_otroci = new List<Button>();
                 for (int k = 0; k < 3; ++k) {
                     for (int l = 0; l < 3; ++l) {
                         trenutni_otroci.Add(listOfBoxes[i * 27 + j * 3 + k * 9 + l]);
@@ -75,7 +72,6 @@ public class GameController : MonoBehaviour {
                 
             }
         }
-        */
 		
 	}
 	

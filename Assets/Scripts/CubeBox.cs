@@ -7,10 +7,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CubeBox : MonoBehaviour {
 
-    public List<GameObject> otroci;
+    public List<Button> otroci;
     public int pozicija = -1;
     public int stanje = 0;  // 0 - empty, 1 - player 1, 2 - player 2
 
