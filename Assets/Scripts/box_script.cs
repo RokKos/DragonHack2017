@@ -11,8 +11,8 @@ public class box_script : MonoBehaviour {
     Image myImage;
 
     public int stanje = 0;
-    public int pozicija;
-    public int parent;
+    public int pozicija = -1;
+    public int parent = -1;
 
 	// Use this for initialization
 	void Start () {

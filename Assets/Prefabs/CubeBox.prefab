@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 222567083262622142}
   - component: {fileID: 114501343481599622}
   - component: {fileID: 114257097836427248}
-  - component: {fileID: 114552669390079504}
+  - component: {fileID: 114873597152958104}
   m_Layer: 5
-  m_Name: box
+  m_Name: CubeBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,18 +85,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114501343481599622}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114552669390079504}
-        m_MethodName: Click
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114330523342253450
@@ -151,7 +140,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 25ff91743a1fd5a45a30d9bebea70a4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8364e55d9e5ab954a90a84cf7a55d520, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -159,7 +148,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114552669390079504
+--- !u!114 &114873597152958104
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -167,17 +156,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1402474774470514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 686866d3addfeef4bb81e666098d9994, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fa422dcc8a99ba418854b724ee72ce0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier:
-  images:
-  - {fileID: 21300000, guid: 25ff91743a1fd5a45a30d9bebea70a4b, type: 3}
-  - {fileID: 21300000, guid: 8364e55d9e5ab954a90a84cf7a55d520, type: 3}
-  - {fileID: 21300000, guid: cec7fae4e5318c444907a4698a52a200, type: 3}
-  gameController: {fileID: 0}
+  m_EditorClassIdentifier: 
+  otroci: []
+  pozicija: -1
   stanje: 0
-  pozicija: 0
-  parent: 0
 --- !u!222 &222351271623629712
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CubeBox : MonoBehaviour {
 
-    private List<GameObject> otroci;
+    public List<GameObject> otroci;
     public int pozicija = -1;
     public int stanje = 0;  // 0 - empty, 1 - player 1, 2 - player 2
 
