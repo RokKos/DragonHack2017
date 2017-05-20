@@ -132,18 +132,41 @@ public class GameController : MonoBehaviour {
     }
 
     public void nextMoveHint (int polje) {
-        if (prejsnjaPoteza != -1) {
+        Debug.Log(prejsnjaPoteza + " " + polje);
+        // Ce ni zacetek
+        if (prejsnjaPoteza != -1 && prejsnjaPoteza != 10) {
+            Debug.Log("Stop: " + prejsnjaPoteza);
+            //StopCoroutine(fadeAnimacija(prejsnjaPoteza));
             gridList[prejsnjaPoteza].GetComponent<Image>().color = Color.black;
         } else if (prejsnjaPoteza == 10) {
             for (int i = 0; i < 9; ++i) {
                 gridList[i].GetComponent<Image>().color = Color.black;
+                //StopCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
             }
         }
         if (polje == 10) {
             for (int i = 0; i < 9; ++i) {
                 gridList[i].GetComponent<Image>().color = Color.red;
+                //StartCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
             }
+        } else {
+            Debug.Log("START: " + polje);
+            gridList[polje].GetComponent<Image>().color = Color.red;
+            //StartCoroutine(fadeAnimacija(polje));
         }
-        gridList[polje].GetComponent<Image>().color = Color.red;
+    }
+
+    public IEnumerator fadeAnimacija (int polje) {
+        int diff = -1;
+        while (true) {
+
+            if (gridList[polje].GetComponent<Image>().color.a < 0.5 || gridList[polje].GetComponent<Image>().color.a == 1.0) {
+                diff *= -1;
+            }
+            Color c = gridList[polje].GetComponent<Image>().color;
+            gridList[polje].GetComponent<Image>().color = new Color(c.r, c.g, c.b, c.a + diff * 0.05f);
+            yield return null;
+        }
+
     }
 }
