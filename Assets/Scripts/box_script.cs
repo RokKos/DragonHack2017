@@ -44,13 +44,7 @@ public class box_script : MonoBehaviour {
         
         
         if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().triVVrsto()) {
-            //TODO: Kdo je zmagal
-            if(!gameController.firstPlayer) {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[2];
-            }
-            else {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[1];
-            }
+            gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[stanje];
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);
             Debug.Log("Zmaga v majhnem");
         }
