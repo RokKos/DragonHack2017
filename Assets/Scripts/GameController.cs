@@ -150,12 +150,21 @@ public class GameController : MonoBehaviour {
         }
         if (polje == 10) {
             for (int i = 0; i < 9; ++i) {
-                gridList[i].GetComponent<Image>().color = Color.red;
+                if (!firstPlayer) {
+                    gridList[i].GetComponent<Image>().color = Color.red;
+                } else {
+                    gridList[i].GetComponent<Image>().color = Color.yellow;
+                }
+                
                 //StartCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
             }
         } else {
             Debug.Log("START: " + polje);
-            gridList[polje].GetComponent<Image>().color = Color.red;
+            if (!firstPlayer) {
+                gridList[polje].GetComponent<Image>().color = Color.red;
+            } else {
+                gridList[polje].GetComponent<Image>().color = Color.yellow;
+            }
             //StartCoroutine(fadeAnimacija(polje));
         }
     }
