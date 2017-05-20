@@ -22,6 +22,7 @@ public class box_script : MonoBehaviour {
 
     public void onClick () {
         Debug.Log("Here");
+        Debug.Log(gameController.prejsnjaPoteza);
         if (!legalMove()) {
             Debug.Log("Ilegal");
             return;
@@ -39,18 +40,12 @@ public class box_script : MonoBehaviour {
 
         myImage.sprite = images[stanje];
 
-        gameController.cubeBoxesList[parent].GetComponent<CubeBox>().izpisiOtroke();
+        //gameController.cubeBoxesList[parent].GetComponent<CubeBox>().izpisiOtroke();
 
         
         
         if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().triVVrsto()) {
-            //TODO: Kdo je zmagal
-            if(!gameController.firstPlayer) {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[2];
-            }
-            else {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[1];
-            }
+            gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[stanje];
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);
             Debug.Log("Zmaga v majhnem");
         }
@@ -69,7 +64,7 @@ public class box_script : MonoBehaviour {
         if (gameController.prejsnjaPoteza == -1) {
             return true;
         }
-        
+        Debug.Log("lalalala");
         return gameController.prejsnjaPoteza == parent && stanje == 0;
     }
 }
