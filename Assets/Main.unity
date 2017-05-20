@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxPrefab: {fileID: 114257097836427248, guid: f88ac16bdcb9eec45b78a3199208bf61,
     type: 2}
-  cubeBoxPrefab: {fileID: 1402474774470514, guid: 240527afdf752434890d47ecd04225ee,
+  cubeBoxPrefab: {fileID: 114257097836427248, guid: 240527afdf752434890d47ecd04225ee,
     type: 2}
   panelBoxes: {fileID: 1900274695}
   canvas: {fileID: 227433903}
