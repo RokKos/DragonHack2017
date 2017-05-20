@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour {
             for (int j = 0; j < 3; ++j) {
                 Button temp = Instantiate(cubeBoxPrefab, panelBoxes, false);
                 // Move into rigth postition
-                temp.transform.localScale = new Vector3(3 * scale, 3 *scale, 3 * scale);
+                temp.transform.localScale = new Vector3(3 * (scale + 0.2f), 3 * (scale + 0.2f), 3 * (scale + 0.2f));
                 temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * (scale + 0.2f) * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f) * 3, 1);
                 temp.GetComponent<CubeBox>().stanje = 0;
                 temp.GetComponent<CubeBox>().pozicija = i * 3 + j;
@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour {
     }
 
     void nextMoveHint (int polje) {
-        if (prejsnjaPoteza != -10) {
+        if (prejsnjaPoteza != -1) {
             gridList[prejsnjaPoteza].GetComponent<Image>().color = Color.black;
         }
         gridList[polje].GetComponent<Image>().color = Color.red;
