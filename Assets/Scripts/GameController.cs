@@ -135,6 +135,18 @@ public class GameController : MonoBehaviour {
         return false;
     }
 
+    public bool konecPotez () {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (cubeBoxesList[i * 3 + j].GetComponent<CubeBox>().stanje == 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public void nextMoveHint (int polje) {
         Debug.Log(prejsnjaPoteza + " " + polje);
         // Ce ni zacetek
