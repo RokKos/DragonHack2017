@@ -24,6 +24,9 @@ public class box_script : MonoBehaviour {
         Debug.Log("Here");
         Debug.Log(gameController.prejsnjaPoteza);
         if (!legalMove()) {
+            // Show error to user
+            StopCoroutine(gameController.shakeCamera());
+            StartCoroutine(gameController.shakeCamera());
             Debug.Log("Ilegal");
             return;
         }

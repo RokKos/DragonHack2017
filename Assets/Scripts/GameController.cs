@@ -23,6 +23,9 @@ public class GameController : MonoBehaviour {
     [Range(0, 10)]
     public float scale = 3f;
 
+    [Range(0, 10)]
+    public float travelLeng = 0.2f;
+
     public int prejsnjaPoteza = -1;
     public bool firstPlayer = true;
 
@@ -35,6 +38,7 @@ public class GameController : MonoBehaviour {
         cubeBoxesList = new Button[9];
         gridList = new Button[9];
         scale = 3f;
+        travelLeng = 0.2f;
 
         // Spawning grid
         for (int i = 0; i < 3; ++i) {
@@ -168,5 +172,30 @@ public class GameController : MonoBehaviour {
             yield return null;
         }
 
+    }
+
+    public IEnumerator shakeCamera () {
+        float travel = 0.0f;
+        // V levo smer
+        while (travel < travelLeng) {
+            travel += 0.1f;
+            panelBoxes.position = new Vector2(panelBoxes.position.x + 0.1f, panelBoxes.position.y);
+            yield return null;
+        }
+        travel = 0.0f;
+        // V desno smer
+        while (travel < 2 * travelLeng) {
+            travel += 0.1f;
+            panelBoxes.position = new Vector2(panelBoxes.position.x - 0.1f, panelBoxes.position.y);
+            yield return null;
+        }
+        travel = 0.0f;
+        // Nazaj na prvotno
+        while (travel < travelLeng) {
+            travel += 0.1f;
+            panelBoxes.position = new Vector2(panelBoxes.position.x + 0.1f, panelBoxes.position.y);
+            yield return null;
+        }
+        panelBoxes.position = new Vector2(0.0f, 0.0f);
     }
 }
