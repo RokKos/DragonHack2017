@@ -12,10 +12,13 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     [SerializeField] Button boxPrefab;
     [SerializeField] Button cubeBoxPrefab;
+    [SerializeField] Button gridPrefab;
+
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
     Button[] listOfBoxes;
     public Button[] cubeBoxesList;
+    private Button[] gridList;
 
     [Range(0, 10)]
     public float scale = 3f;
@@ -30,6 +33,7 @@ public class GameController : MonoBehaviour {
         firstPlayer = true;
         listOfBoxes = new Button[MAXBOXES];
         cubeBoxesList = new Button[9];
+        gridList = new Button[9];
         scale = 3f;
 
         // Spawning small boxes
@@ -52,8 +56,8 @@ public class GameController : MonoBehaviour {
             for (int j = 0; j < 3; ++j) {
                 Button temp = Instantiate(cubeBoxPrefab, panelBoxes, false);
                 // Move into rigth postition
-                temp.transform.localScale = new Vector3(3 * scale, 3 *scale, 3 * scale);
-                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * scale * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * scale * 3, 1);
+                temp.transform.localScale = new Vector3(3 * (scale + 0.2f), 3 * (scale + 0.2f), 3 * (scale + 0.2f));
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * (scale + 0.2f) * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f) * 3, 1);
                 temp.GetComponent<CubeBox>().stanje = 0;
                 temp.GetComponent<CubeBox>().pozicija = i * 3 + j;
                 //temp.GetComponentInParent<GameObject>().SetActive(false);
@@ -74,6 +78,17 @@ public class GameController : MonoBehaviour {
                 
             }
         }
+
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                Button temp = Instantiate(gridPrefab, panelBoxes, false);
+                // Move into rigth postition
+                temp.transform.localScale = new Vector3(3 * (scale + 0.2f), 3 * (scale + 0.2f), 3 * (scale + 0.2f));
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * (scale + 0.2f) * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f) * 3, 1);
+                gridList[i * 3 + j] = temp;
+            }
+        }
+
 		
 	}
 	
@@ -115,5 +130,12 @@ public class GameController : MonoBehaviour {
         }
 
         return false;
+    }
+
+    void nextMoveHint (int polje) {
+        if (prejsnjaPoteza != -1) {
+            gridList[prejsnjaPoteza].GetComponent<Image>().color = Color.black;
+        }
+        gridList[polje].GetComponent<Image>().color = Color.red;
     }
 }
