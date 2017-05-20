@@ -57,4 +57,8 @@ public class CubeBox : MonoBehaviour {
         }
 
     }
+
+    public IEnumerator fadeAnimacija() {
+
+    }
 }
