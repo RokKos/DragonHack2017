@@ -22,6 +22,7 @@ public class box_script : MonoBehaviour {
 
     public void onClick () {
         Debug.Log("Here");
+        Debug.Log(gameController.prejsnjaPoteza);
         if (!legalMove()) {
             Debug.Log("Ilegal");
             return;
@@ -35,7 +36,7 @@ public class box_script : MonoBehaviour {
 
         myImage.sprite = images[stanje];
 
-        gameController.cubeBoxesList[parent].GetComponent<CubeBox>().izpisiOtroke();
+        //gameController.cubeBoxesList[parent].GetComponent<CubeBox>().izpisiOtroke();
 
         
         
@@ -80,7 +81,7 @@ public class box_script : MonoBehaviour {
         } else if (gameController.prejsnjaPoteza == 10 && stanje != 0) {
             return false;
         }
-        
+        Debug.Log("lalalala");
         return gameController.prejsnjaPoteza == parent && stanje == 0;
     }
 }
