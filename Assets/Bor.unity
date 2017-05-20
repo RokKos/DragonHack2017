@@ -235,6 +235,7 @@ MonoBehaviour:
     type: 2}
   panelBoxes: {fileID: 1900274695}
   canvas: {fileID: 227433903}
+  cubeBoxesList: []
   scale: 0.3
   prejsnjaPoteza: -1
   firstPlayer: 1
