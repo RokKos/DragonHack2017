@@ -27,6 +27,8 @@ public class box_script : MonoBehaviour {
             return;
         }
 
+        gameController.nextMoveHint(pozicija);
+
         gameController.prejsnjaPoteza = pozicija;
 
         if (gameController.firstPlayer) {
