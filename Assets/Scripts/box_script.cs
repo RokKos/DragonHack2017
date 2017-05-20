@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class box_script : MonoBehaviour {
 
     [SerializeField] Sprite[] images;
+    private GameController gameController;
 
     Image myImage;
 
@@ -15,6 +16,7 @@ public class box_script : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        gameController = FindObjectOfType<GameController>();
         myImage = GetComponent<Image>();
         myImage.sprite = images[0];
 
