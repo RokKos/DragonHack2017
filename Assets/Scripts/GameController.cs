@@ -38,9 +38,10 @@ public class GameController : MonoBehaviour {
                 Button temp = Instantiate(boxPrefab, panelBoxes, false);
                 // Move into rigth postition
                 temp.transform.localScale = new Vector3(scale, scale, scale);
-                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * (scale+0.2f), (j - 4) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 4) * temp.GetComponent<RectTransform>().rect.height * (scale+0.2f), (4 - j) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
                 temp.GetComponent<box_script>().stanje = 0;
-                temp.GetComponent<box_script>().pozicija = (i % 3) * 3 + (j % 3); 
+                temp.GetComponent<box_script>().pozicija = (i % 3) * 3 + (j % 3);
+                temp.name = i + " " + j;
                 listOfBoxes[i * 9 + j] = temp;
             }
         }
@@ -93,23 +94,23 @@ public class GameController : MonoBehaviour {
     public bool konecIgre () {
         // Check rows
         for (int i = 0; i < 3; ++i) {
-            if (cubeBoxesList[i * 3].GetComponent<box_script>().stanje == cubeBoxesList[i * 3 + 1].GetComponent<box_script>().stanje && cubeBoxesList[i * 3].GetComponent<box_script>().stanje == cubeBoxesList[i * 3 + 2].GetComponent<box_script>().stanje) {
+            if (cubeBoxesList[i * 3].GetComponent<CubeBox>().stanje != 0 && cubeBoxesList[i * 3].GetComponent<CubeBox>().stanje == cubeBoxesList[i * 3 + 1].GetComponent<CubeBox>().stanje && cubeBoxesList[i * 3].GetComponent<CubeBox>().stanje == cubeBoxesList[i * 3 + 2].GetComponent<CubeBox>().stanje) {
                 return true;
             }
         }
         // Check columns
         for (int i = 0; i < 3; ++i) {
-            if (cubeBoxesList[i].GetComponent<box_script>().stanje == cubeBoxesList[i + 3].GetComponent<box_script>().stanje && cubeBoxesList[i].GetComponent<box_script>().stanje == cubeBoxesList[i + 6].GetComponent<box_script>().stanje) {
+            if (cubeBoxesList[i + 3].GetComponent<CubeBox>().stanje != 0 && cubeBoxesList[i].GetComponent<CubeBox>().stanje == cubeBoxesList[i + 3].GetComponent<CubeBox>().stanje && cubeBoxesList[i].GetComponent<CubeBox>().stanje == cubeBoxesList[i + 6].GetComponent<CubeBox>().stanje) {
                 return true;
             }
         }
 
         // Check diagonals
-        if (cubeBoxesList[0].GetComponent<box_script>().stanje == cubeBoxesList[4].GetComponent<box_script>().stanje && cubeBoxesList[0].GetComponent<box_script>().stanje == cubeBoxesList[8].GetComponent<box_script>().stanje) {
+        if (cubeBoxesList[0].GetComponent<CubeBox>().stanje != 0 && cubeBoxesList[0].GetComponent<CubeBox>().stanje == cubeBoxesList[4].GetComponent<CubeBox>().stanje && cubeBoxesList[0].GetComponent<CubeBox>().stanje == cubeBoxesList[8].GetComponent<CubeBox>().stanje) {
             return true;
         }
 
-        if (cubeBoxesList[2].GetComponent<box_script>().stanje == cubeBoxesList[4].GetComponent<box_script>().stanje && cubeBoxesList[2].GetComponent<box_script>().stanje == cubeBoxesList[6].GetComponent<box_script>().stanje) {
+        if (cubeBoxesList[4].GetComponent<CubeBox>().stanje != 0 && cubeBoxesList[2].GetComponent<CubeBox>().stanje == cubeBoxesList[4].GetComponent<CubeBox>().stanje && cubeBoxesList[2].GetComponent<CubeBox>().stanje == cubeBoxesList[6].GetComponent<CubeBox>().stanje) {
             return true;
         }
 
