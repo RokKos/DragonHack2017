@@ -36,6 +36,17 @@ public class GameController : MonoBehaviour {
         gridList = new Button[9];
         scale = 3f;
 
+        // Spawning grid
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                Button temp = Instantiate(gridPrefab, panelBoxes, false);
+                // Move into rigth postition
+                temp.transform.localScale = new Vector3(3 * (scale + 0.2f), 3 * (scale + 0.2f), 3 * (scale + 0.2f));
+                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * (scale + 0.2f) * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f) * 3, 1);
+                gridList[i * 3 + j] = temp;
+            }
+        }
+
         // Spawning small boxes
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
@@ -51,7 +62,7 @@ public class GameController : MonoBehaviour {
         }
 
         // Spawning big boxes
-        
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 Button temp = Instantiate(cubeBoxPrefab, panelBoxes, false);
@@ -75,21 +86,9 @@ public class GameController : MonoBehaviour {
                 temp.GetComponent<CubeBox>().otroci = trenutni_otroci;
 
                 cubeBoxesList[i * 3 + j] = temp;
-                
+
             }
         }
-
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                Button temp = Instantiate(gridPrefab, panelBoxes, false);
-                // Move into rigth postition
-                temp.transform.localScale = new Vector3(3 * (scale + 0.2f), 3 * (scale + 0.2f), 3 * (scale + 0.2f));
-                temp.GetComponent<RectTransform>().localPosition = new Vector3((i - 1) * temp.GetComponent<RectTransform>().rect.height * (scale + 0.2f) * 3, (j - 1) * temp.GetComponent<RectTransform>().rect.width * (scale + 0.2f) * 3, 1);
-                gridList[i * 3 + j] = temp;
-            }
-        }
-
-		
 	}
 	
 	// Update is called once per frame
@@ -132,7 +131,7 @@ public class GameController : MonoBehaviour {
         return false;
     }
 
-    void nextMoveHint (int polje) {
+    public void nextMoveHint (int polje) {
         if (prejsnjaPoteza != -1) {
             gridList[prejsnjaPoteza].GetComponent<Image>().color = Color.black;
         }
