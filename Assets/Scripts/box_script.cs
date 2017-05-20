@@ -27,16 +27,6 @@ public class box_script : MonoBehaviour {
             return;
         }
 
-        if (gameController.cubeBoxesList[pozicija].GetComponent<CubeBox>().stanje != 0) {
-            gameController.nextMoveHint(10);
-            gameController.prejsnjaPoteza = 10;
-        } else {
-            gameController.nextMoveHint(pozicija);
-            gameController.prejsnjaPoteza = pozicija;
-        }
-
-        
-
         if (gameController.firstPlayer) {
             stanje = 1;
         } else {
@@ -66,6 +56,14 @@ public class box_script : MonoBehaviour {
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
             Debug.Log("Zmaga");
+        }
+
+        if (gameController.cubeBoxesList[pozicija].GetComponent<CubeBox>().stanje != 0) {
+            gameController.nextMoveHint(10);
+            gameController.prejsnjaPoteza = 10;
+        } else {
+            gameController.nextMoveHint(pozicija);
+            gameController.prejsnjaPoteza = pozicija;
         }
 
         gameController.firstPlayer = !gameController.firstPlayer;
