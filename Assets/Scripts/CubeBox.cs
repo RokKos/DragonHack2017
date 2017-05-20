@@ -53,12 +53,8 @@ public class CubeBox : MonoBehaviour {
 
     public void izpisiOtroke () {
         for (int i = 0; i < 9; ++i) {
-            Debug.Log(i + " :" + otroci[i].GetComponent<box_script>().stanje);
+            //Debug.Log(i + " :" + otroci[i].GetComponent<box_script>().stanje);
         }
-
-    }
-
-    public IEnumerator fadeAnimacija() {
 
     }
 }

@@ -27,9 +27,15 @@ public class box_script : MonoBehaviour {
             return;
         }
 
-        gameController.nextMoveHint(pozicija);
+        if (gameController.cubeBoxesList[pozicija].GetComponent<CubeBox>().stanje != 0) {
+            gameController.nextMoveHint(10);
+            gameController.prejsnjaPoteza = 10;
+        } else {
+            gameController.nextMoveHint(pozicija);
+            gameController.prejsnjaPoteza = pozicija;
+        }
 
-        gameController.prejsnjaPoteza = pozicija;
+        
 
         if (gameController.firstPlayer) {
             stanje = 1;
@@ -47,9 +53,11 @@ public class box_script : MonoBehaviour {
             //TODO: Kdo je zmagal
             if(!gameController.firstPlayer) {
                 gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[2];
+                gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 2;
             }
             else {
                 gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[1];
+                gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 1;
             }
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);
             Debug.Log("Zmaga v majhnem");
@@ -66,8 +74,13 @@ public class box_script : MonoBehaviour {
 
     bool legalMove () {
         // Prva poteza
-        if (gameController.prejsnjaPoteza == -1) {
+        if (gameController.prejsnjaPoteza == -1) { 
             return true;
+        }
+        if (gameController.prejsnjaPoteza == 10 && stanje == 0) {
+            return true;
+        } else if (gameController.prejsnjaPoteza == 10 && stanje != 0) {
+            return false;
         }
         
         return gameController.prejsnjaPoteza == parent && stanje == 0;
