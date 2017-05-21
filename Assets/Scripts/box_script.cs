@@ -46,11 +46,11 @@ public class box_script : MonoBehaviour {
         if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().triVVrsto()) {
             //TODO: Kdo je zmagal
             if(!gameController.firstPlayer) {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[2];
+                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[4];  // Big X
                 gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 2;
             }
             else {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[1];
+                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[3];  // Big O 
                 gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 1;
             }
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);

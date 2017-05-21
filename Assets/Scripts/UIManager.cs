@@ -28,4 +28,8 @@ public class UIManager : MonoBehaviour {
     public void gotoMain () {
         SceneManager.LoadScene("Main");
     }
+
+    public void gotoMenu () {
+        SceneManager.LoadScene("Start");
+    }
 }
