@@ -15,12 +15,17 @@ public class GameController : MonoBehaviour {
     [SerializeField] Button gridPrefab;
     [SerializeField] Image player1Arrow;
     [SerializeField] Image player2Arrow;
+    [SerializeField] Transform endGamePanel;
+
+    [SerializeField] Image win;
 
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
     Button[] listOfBoxes;
     public Button[] cubeBoxesList;
     private Button[] gridList;
+
+    public Sprite[] GameOverImages;
 
     [Range(0, 10)]
     public float scale = 3f;
@@ -32,6 +37,7 @@ public class GameController : MonoBehaviour {
     public bool firstPlayer = true;
     private float player1Time = 0.0f;
     private float player2Time = 0.0f;
+
 
     const int MAXBOXES = 81; // 81 Small boxes and 9 big boxes
 
@@ -45,6 +51,9 @@ public class GameController : MonoBehaviour {
         travelLeng = 0.2f;
         // TODO: Time
         player1Time = Time.time;
+
+        endGamePanel.gameObject.SetActive(false);
+        panelBoxes.gameObject.SetActive(true);
 
 
         // Spawning grid
@@ -238,5 +247,11 @@ public class GameController : MonoBehaviour {
             player2Arrow.enabled = true;//gameObject.SetActive(false);
         }
 
+    }
+
+    public void ShowWinner (int winner) {
+        win.sprite = GameOverImages[winner];
+        endGamePanel.gameObject.SetActive(true);
+        panelBoxes.gameObject.SetActive(false);
     }
 }

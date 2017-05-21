@@ -46,11 +46,11 @@ public class box_script : MonoBehaviour {
         if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().triVVrsto()) {
             //TODO: Kdo je zmagal
             if(!gameController.firstPlayer) {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[2];
+                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[4];  // Big X
                 gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 2;
             }
             else {
-                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[1];
+                gameController.cubeBoxesList[parent].GetComponent<Image>().sprite = images[3];  // Big O 
                 gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 1;
             }
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);
@@ -64,10 +64,17 @@ public class box_script : MonoBehaviour {
 
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
+            if (gameController.firstPlayer) {
+                gameController.ShowWinner(0);
+            } else {
+                gameController.ShowWinner(1);
+            }
+            
             Debug.Log("Zmaga");
         }
 
         if (gameController.konecPotez()) {
+            gameController.ShowWinner(2);
             Debug.Log("Zmanjkalo potez");
         }
 
