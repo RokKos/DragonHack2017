@@ -80,6 +80,7 @@ public class box_script : MonoBehaviour {
         }
 
         gameController.firstPlayer = !gameController.firstPlayer;
+        gameController.changePicture();
 
     }
 

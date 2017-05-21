@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
     [SerializeField] Button boxPrefab;
     [SerializeField] Button cubeBoxPrefab;
     [SerializeField] Button gridPrefab;
+    [SerializeField] Image player1Arrow;
+    [SerializeField] Image player2Arrow;
 
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
@@ -28,6 +30,8 @@ public class GameController : MonoBehaviour {
 
     public int prejsnjaPoteza = -1;
     public bool firstPlayer = true;
+    private float player1Time = 0.0f;
+    private float player2Time = 0.0f;
 
     const int MAXBOXES = 81; // 81 Small boxes and 9 big boxes
 
@@ -39,6 +43,9 @@ public class GameController : MonoBehaviour {
         gridList = new Button[9];
         scale = 3f;
         travelLeng = 0.2f;
+        // TODO: Time
+        player1Time = Time.time;
+
 
         // Spawning grid
         for (int i = 0; i < 3; ++i) {
@@ -220,5 +227,16 @@ public class GameController : MonoBehaviour {
             yield return null;
         }
         panelBoxes.position = new Vector2(0.0f, 0.0f);
+    }
+
+    public void changePicture () {
+        if (firstPlayer) {
+            player1Arrow.enabled = true;//.gameObject.SetActive(true);
+            player2Arrow.enabled = false;//gameObject.SetActive(false);
+        } else {
+            player1Arrow.enabled = false;//.gameObject.SetActive(true);
+            player2Arrow.enabled = true;//gameObject.SetActive(false);
+        }
+
     }
 }
