@@ -312,6 +312,8 @@ MonoBehaviour:
   win: {fileID: 1955610317}
   panelBoxes: {fileID: 1900274695}
   canvas: {fileID: 227433903}
+  player1TimeText: {fileID: 521734634}
+  player2TimeText: {fileID: 1199312793}
   cubeBoxesList: []
   GameOverImages:
   - {fileID: 21300000, guid: a03b3f06741c0dc428a530572d93837f, type: 3}
@@ -345,8 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4183769dec51774469e6dcb8960e8c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelBoxes: {fileID: 1900274695}
   startMenuPanel: {fileID: 0}
+  howToPanel: {fileID: 0}
+  AboutPanel: {fileID: 0}
 --- !u!1 &521734632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.296, y: 0.030437315}
   m_AnchorMax: {x: 0.6975038, y: 0.069000006}
-  m_AnchoredPosition: {x: 6, y: 1382.5001}
+  m_AnchoredPosition: {x: 6, y: 1382.5}
   m_SizeDelta: {x: 1150, y: 2951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1900274696
