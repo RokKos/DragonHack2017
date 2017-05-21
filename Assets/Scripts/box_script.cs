@@ -64,10 +64,17 @@ public class box_script : MonoBehaviour {
 
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
+            if (gameController.firstPlayer) {
+                gameController.ShowWinner(0);
+            } else {
+                gameController.ShowWinner(1);
+            }
+            
             Debug.Log("Zmaga");
         }
 
         if (gameController.konecPotez()) {
+            gameController.ShowWinner(2);
             Debug.Log("Zmanjkalo potez");
         }
 
