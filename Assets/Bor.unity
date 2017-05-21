@@ -323,6 +323,7 @@ MonoBehaviour:
   canvas: {fileID: 227433903}
   cubeBoxesList: []
   scale: 0.3
+  travelLeng: 0.2
   prejsnjaPoteza: -1
   firstPlayer: 1
 --- !u!4 &417865950
