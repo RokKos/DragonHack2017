@@ -122,8 +122,14 @@ public class GameController : MonoBehaviour {
 	void Update () {
         //changeScale();\
         // Calculates new time
-        player1Time += Time.time - lastTime;
-        player1TimeText.text = player1Time.ToString();
+        if(firstPlayer) {
+            player1Time += Time.time - lastTime;
+            player1TimeText.text = player1Time.ToString("0.00");
+        }
+        else {
+            player2Time += Time.time - lastTime;
+            player2TimeText.text = player2Time.ToString("0.00");
+        }
         lastTime = Time.time;
 	}
 
