@@ -53,8 +53,9 @@ public class GameController : MonoBehaviour {
         scale = 3f;
         travelLeng = 0.2f;
         //Time
-        player1Time = Time.time;
+        player1Time = 0;
         player2Time = 0;
+        lastTime = Time.time;
         player1TimeText.text = player2Time.ToString();
         player2TimeText.text = player2Time.ToString();
 
