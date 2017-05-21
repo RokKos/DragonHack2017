@@ -49,10 +49,10 @@ public class UIManager : MonoBehaviour {
     }
 
     void GoBack () {
-        state = 0;
         startMenuPanel.gameObject.SetActive(true);
         howToPanel.gameObject.SetActive(false);
         AboutPanel.gameObject.SetActive(false);
+        state = 0;
     }
 
     public void gotoAbout () {
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour {
     void decide () {
         switch (state) {
             case 0:
-                Application.Quit();
+                //Application.Quit();
                 break;
             case 1:
                 GoBack();
