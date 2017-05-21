@@ -571,9 +571,12 @@ MonoBehaviour:
     type: 2}
   player1Arrow: {fileID: 0}
   player2Arrow: {fileID: 0}
+  endGamePanel: {fileID: 0}
+  win: {fileID: 0}
   panelBoxes: {fileID: 1900274695}
   canvas: {fileID: 227433903}
   cubeBoxesList: []
+  GameOverImages: []
   scale: 0.3
   travelLeng: 0.2
   prejsnjaPoteza: -1
@@ -597,7 +600,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 417865948}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4183769dec51774469e6dcb8960e8c78, type: 3}
   m_Name: 

@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] Transform panelBoxes;
     [SerializeField] Transform canvas;
+    [SerializeField] Text player1TimeText;
+    [SerializeField] Text player2TimeText;
     Button[] listOfBoxes;
     public Button[] cubeBoxesList;
     private Button[] gridList;
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour {
     public bool firstPlayer = true;
     private float player1Time = 0.0f;
     private float player2Time = 0.0f;
+    private float lastTime = 0.0f;
 
 
     const int MAXBOXES = 81; // 81 Small boxes and 9 big boxes
@@ -49,8 +52,12 @@ public class GameController : MonoBehaviour {
         gridList = new Button[9];
         scale = 3f;
         travelLeng = 0.2f;
-        // TODO: Time
+        //Time
         player1Time = Time.time;
+        player2Time = 0;
+        player1TimeText.text = player2Time.ToString();
+        player2TimeText.text = player2Time.ToString();
+
 
         endGamePanel.gameObject.SetActive(false);
         panelBoxes.gameObject.SetActive(true);
@@ -113,7 +120,11 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //changeScale();
+        //changeScale();\
+        // Calculates new time
+        player1Time += Time.time - lastTime;
+        player1TimeText.text = player1Time.ToString();
+        lastTime = Time.time;
 	}
 
     void changeScale () {
