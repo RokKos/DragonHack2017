@@ -58,6 +58,8 @@ public class GameController : MonoBehaviour {
         lastTime = Time.time;
         player1TimeText.text = player2Time.ToString();
         player2TimeText.text = player2Time.ToString();
+        player1Arrow.enabled = true;
+        player2Arrow.enabled = false;
 
 
         endGamePanel.gameObject.SetActive(false);
