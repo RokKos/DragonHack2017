@@ -306,6 +306,7 @@ MonoBehaviour:
     type: 2}
   gridPrefab: {fileID: 114659963087966540, guid: c9a536462f74a0c4ab968b18bcd694d4,
     type: 2}
+  EmptyBox: {fileID: 114659963087966540, guid: 511309b204092c243818665f4c0e0385, type: 2}
   player1Arrow: {fileID: 238087749}
   player2Arrow: {fileID: 691484222}
   endGamePanel: {fileID: 1873386225}

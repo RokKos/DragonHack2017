@@ -30,7 +30,7 @@ public class box_script : MonoBehaviour {
             Debug.Log("Ilegal");
             return;
         }
-
+        // Postavitev stanja malega kvadratka
         if (gameController.firstPlayer) {
             stanje = 1;
         } else {
@@ -41,8 +41,7 @@ public class box_script : MonoBehaviour {
 
         //gameController.cubeBoxesList[parent].GetComponent<CubeBox>().izpisiOtroke();
 
-        
-        
+        // Preverjanmje zmage
         if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().triVVrsto()) {
             //TODO: Kdo je zmagal
             if(!gameController.firstPlayer) {
@@ -61,7 +60,7 @@ public class box_script : MonoBehaviour {
             gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 3;
             Debug.Log("Zasedeno");
         }
-
+        
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
             if (gameController.firstPlayer) {
@@ -78,6 +77,7 @@ public class box_script : MonoBehaviour {
             Debug.Log("Zmanjkalo potez");
         }
 
+        // Kazanje naslednje poteze
         if (gameController.cubeBoxesList[pozicija].GetComponent<CubeBox>().stanje != 0) {
             gameController.nextMoveHint(10);
             gameController.prejsnjaPoteza = 10;
@@ -85,6 +85,10 @@ public class box_script : MonoBehaviour {
             gameController.nextMoveHint(pozicija);
             gameController.prejsnjaPoteza = pozicija;
         }
+
+        // Kazanje prejsnje poteze
+        gameController.addLastMove(parent, pozicija);
+        gameController.showPrevius();
 
         gameController.firstPlayer = !gameController.firstPlayer;
         gameController.changePicture();
