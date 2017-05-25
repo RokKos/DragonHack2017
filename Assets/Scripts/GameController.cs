@@ -348,8 +348,22 @@ public class GameController : MonoBehaviour {
                 // just call next move hint
                 // Because this will erase this move
                 // But we must set prejsnja poteza to 2 back in history not only one like now
-                nextMoveHint(allMoves[length - 1].cubeBox);
-                prejsnjaPoteza = allMoves[length - 2].smallBox;
+
+                // Check if 2 moves earlyer player could place mark everywhere
+                // If this is true color whole board
+                if (cubeBoxesList[allMoves[length - 2].smallBox].GetComponent<CubeBox>().stanje != 0) {
+                    nextMoveHint(10);
+                    prejsnjaPoteza = 10;
+                } else {
+                    // Clear board
+                    prejsnjaPoteza = 10;  
+                    nextMoveHint(-1);
+                    // Set prejsnjaPoteza will be back to normal
+                    prejsnjaPoteza = allMoves[length - 2].smallBox;
+                    // And now draw right grid
+                    nextMoveHint(allMoves[length - 1].cubeBox);
+                }
+                
                 moveBox(length - 2);
             } else {
                 nextMoveHint(-1);
