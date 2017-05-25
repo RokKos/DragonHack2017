@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
     [SerializeField] Transform startMenuPanel;
     [SerializeField] Transform howToPanel;
     [SerializeField] Transform AboutPanel;
+    [SerializeField] GameController gameController;
+
     private int state = 0;  // 0 - Home, 1 - How to, 2 - About, 3 - Main
 
 	// Use this for initialization
@@ -85,5 +87,9 @@ public class UIManager : MonoBehaviour {
                 gotoMenu();
                 break;
         }
+    }
+
+    public void undoMove () {
+        gameController.undoMove();
     }
 }

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] Button boxPrefab;
     [SerializeField] Button cubeBoxPrefab;
     [SerializeField] Button gridPrefab;
+    [SerializeField] Button EmptyBox;
     [SerializeField] Image player1Arrow;
     [SerializeField] Image player2Arrow;
     [SerializeField] Transform endGamePanel;
@@ -41,6 +42,18 @@ public class GameController : MonoBehaviour {
     private float player2Time = 0.0f;
     private float lastTime = 0.0f;
 
+    public struct Poteza {
+        public int cubeBox;
+        public int smallBox;
+
+        public Poteza (int cubeBox, int smallBox) {
+            this.cubeBox = cubeBox;
+            this.smallBox = smallBox;
+        }
+    }
+
+    private List<Poteza> allMoves;
+    private Button lastMoveBox;
 
     const int MAXBOXES = 81; // 81 Small boxes and 9 big boxes
 
@@ -50,6 +63,7 @@ public class GameController : MonoBehaviour {
         listOfBoxes = new Button[MAXBOXES];
         cubeBoxesList = new Button[9];
         gridList = new Button[9];
+        allMoves = new List<Poteza>();
         scale = 3f;
         travelLeng = 0.2f;
         //Time
@@ -64,7 +78,6 @@ public class GameController : MonoBehaviour {
 
         endGamePanel.gameObject.SetActive(false);
         panelBoxes.gameObject.SetActive(true);
-
 
         // Spawning grid
         for (int i = 0; i < 3; ++i) {
@@ -119,7 +132,14 @@ public class GameController : MonoBehaviour {
 
             }
         }
-	}
+
+        // Spawn last move box
+        lastMoveBox = Instantiate(EmptyBox, panelBoxes, false);
+        lastMoveBox.transform.localScale = new Vector3(scale, scale, scale);
+        lastMoveBox.GetComponent<Image>().color = Color.green;
+        lastMoveBox.gameObject.SetActive(false);
+        lastMoveBox.name = "lastMoveBox";
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -208,7 +228,7 @@ public class GameController : MonoBehaviour {
                 
                 //StartCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
             }
-        } else {
+        } else if (polje != -1) {
             Debug.Log("START: " + polje);
             if (!firstPlayer) {
                 gridList[polje].GetComponent<Image>().color = Color.red;
@@ -273,5 +293,74 @@ public class GameController : MonoBehaviour {
         win.sprite = GameOverImages[winner];
         endGamePanel.gameObject.SetActive(true);
         panelBoxes.gameObject.SetActive(false);
+    }
+
+    public void addLastMove (int cubeBox, int smallBox) {
+        allMoves.Add(new Poteza(cubeBox, smallBox));
+    }
+
+    public void showPrevius () {
+        int length = allMoves.Count - 1;
+        if (length >= 0) {
+            moveBox(length);
+            
+            // Ta del kode ce bi hoteli spreminjati prav krogce in krizce
+            //if (length - 1 >= 0) {
+                //Poteza previusPrevius = allMoves[length - 1];
+                //cubeBoxesList[previusPrevius.cubeBox].GetComponent<CubeBox>().otroci[previusPrevius.smallBox].GetComponent<Image>().color = Color.white;
+                
+            //}
+            // Prejsnjega nastavi na crno barvo
+            //cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<Image>().color = Color.black;
+        }
+    }
+
+    private void moveBox (int index) {
+        Poteza previus = allMoves[index];
+        // Nastavi last box na rpavo mesto
+        lastMoveBox.gameObject.SetActive(true);
+        int bigX = previus.cubeBox / 3;
+        int bigY = previus.cubeBox % 3;
+        int smallX = previus.smallBox / 3;
+        int smallY = previus.smallBox % 3;
+
+        lastMoveBox.GetComponent<RectTransform>().localPosition = new Vector3((3 * bigX + smallX - 4) * lastMoveBox.GetComponent<RectTransform>().rect.height * (scale + 0.2f), (4 - (3 * bigY + smallY)) * lastMoveBox.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
+    }
+
+
+    public void undoMove () {
+        int length = allMoves.Count;
+        if (length > 0) {
+            Poteza previus = allMoves[length - 1];
+            // Set picture to deafult
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<Image>().sprite = cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<box_script>().images[0];
+            // Set value of small box to zero
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<box_script>().stanje = 0;
+            // Set value of bix box to zero
+            // Because there could not be two moves that won in that square at once
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().stanje = 0;
+            // Set picute of big one to default
+            cubeBoxesList[previus.cubeBox].GetComponent<Image>().sprite = cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().defaultPicture;
+            cubeBoxesList[previus.cubeBox].gameObject.SetActive(false);
+
+            if (length > 1) {
+                // Set grid to default color
+                // just call next move hint
+                // Because this will erase this move
+                // But we must set prejsnja poteza to 2 back in history not only one like now
+                nextMoveHint(allMoves[length - 1].cubeBox);
+                prejsnjaPoteza = allMoves[length - 2].smallBox;
+                moveBox(length - 2);
+            } else {
+                nextMoveHint(-1);
+                prejsnjaPoteza = -1;
+                lastMoveBox.gameObject.SetActive(false);
+            }
+
+            // Set different player
+            firstPlayer = !firstPlayer;
+
+            allMoves.RemoveAt(length - 1);
+        }
     }
 }
