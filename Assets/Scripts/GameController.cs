@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour {
                 
                 //StartCoroutine(gridList[i].GetComponent<Grid>().fadeAnimacija());
             }
-        } else {
+        } else if (polje != -1) {
             Debug.Log("START: " + polje);
             if (!firstPlayer) {
                 gridList[polje].GetComponent<Image>().color = Color.red;
@@ -302,15 +302,7 @@ public class GameController : MonoBehaviour {
     public void showPrevius () {
         int length = allMoves.Count - 1;
         if (length >= 0) {
-            Poteza previus = allMoves[length];
-            // Nastavi last box na rpavo mesto
-            lastMoveBox.gameObject.SetActive(true);
-            int bigX = previus.cubeBox / 3;
-            int bigY = previus.cubeBox % 3;
-            int smallX = previus.smallBox / 3;
-            int smallY = previus.smallBox % 3;
-
-            lastMoveBox.GetComponent<RectTransform>().localPosition = new Vector3((3 * bigX + smallX - 4) * lastMoveBox.GetComponent<RectTransform>().rect.height * (scale + 0.2f), (4 - (3 * bigY + smallY)) * lastMoveBox.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
+            moveBox(length);
             
             // Ta del kode ce bi hoteli spreminjati prav krogce in krizce
             //if (length - 1 >= 0) {
@@ -320,6 +312,55 @@ public class GameController : MonoBehaviour {
             //}
             // Prejsnjega nastavi na crno barvo
             //cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<Image>().color = Color.black;
+        }
+    }
+
+    private void moveBox (int index) {
+        Poteza previus = allMoves[index];
+        // Nastavi last box na rpavo mesto
+        lastMoveBox.gameObject.SetActive(true);
+        int bigX = previus.cubeBox / 3;
+        int bigY = previus.cubeBox % 3;
+        int smallX = previus.smallBox / 3;
+        int smallY = previus.smallBox % 3;
+
+        lastMoveBox.GetComponent<RectTransform>().localPosition = new Vector3((3 * bigX + smallX - 4) * lastMoveBox.GetComponent<RectTransform>().rect.height * (scale + 0.2f), (4 - (3 * bigY + smallY)) * lastMoveBox.GetComponent<RectTransform>().rect.width * (scale + 0.2f), -1);
+    }
+
+
+    public void undoMove () {
+        int length = allMoves.Count;
+        if (length > 0) {
+            Poteza previus = allMoves[length - 1];
+            // Set picture to deafult
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<Image>().sprite = cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<box_script>().images[0];
+            // Set value of small box to zero
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().otroci[previus.smallBox].GetComponent<box_script>().stanje = 0;
+            // Set value of bix box to zero
+            // Because there could not be two moves that won in that square at once
+            cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().stanje = 0;
+            // Set picute of big one to default
+            cubeBoxesList[previus.cubeBox].GetComponent<Image>().sprite = cubeBoxesList[previus.cubeBox].GetComponent<CubeBox>().defaultPicture;
+            cubeBoxesList[previus.cubeBox].gameObject.SetActive(false);
+
+            if (length > 1) {
+                // Set grid to default color
+                // just call next move hint
+                // Because this will erase this move
+                // But we must set prejsnja poteza to 2 back in history not only one like now
+                nextMoveHint(allMoves[length - 1].cubeBox);
+                prejsnjaPoteza = allMoves[length - 2].smallBox;
+                moveBox(length - 2);
+            } else {
+                nextMoveHint(-1);
+                prejsnjaPoteza = -1;
+                lastMoveBox.gameObject.SetActive(false);
+            }
+
+            // Set different player
+            firstPlayer = !firstPlayer;
+
+            allMoves.RemoveAt(length - 1);
         }
     }
 }

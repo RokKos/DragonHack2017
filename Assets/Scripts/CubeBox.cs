@@ -14,9 +14,10 @@ public class CubeBox : MonoBehaviour {
     public List<Button> otroci;
     public int pozicija = -1;
     public int stanje = 0;  // 0 - empty, 1 - player 1, 2 - player 2, 3 - zasedeno
+    public Sprite defaultPicture;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

@@ -9,7 +9,7 @@ public class box_script : MonoBehaviour {
     public int parent = -1;
     private GameController gameController;
 
-    [SerializeField] Sprite[] images;
+    public Sprite[] images;
     Image myImage;
 
 
