@@ -373,6 +373,7 @@ public class GameController : MonoBehaviour {
 
             // Set different player
             firstPlayer = !firstPlayer;
+            changePicture();
 
             allMoves.RemoveAt(length - 1);
         }
