@@ -55,12 +55,7 @@ public class box_script : MonoBehaviour {
             gameController.cubeBoxesList[parent].gameObject.SetActive(true);
             Debug.Log("Zmaga v majhnem");
         }
-
-        if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().zasedenoDoKonca()) {
-            gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 3;
-            Debug.Log("Zasedeno");
-        }
-        
+        // Najprej preveri ce je kdo zmagal
         if (gameController.konecIgre()) {
             //TODO: Kdo je zmagal
             if (gameController.firstPlayer) {
@@ -70,6 +65,11 @@ public class box_script : MonoBehaviour {
             }
             
             Debug.Log("Zmaga");
+        }
+        // Potem pa sele ce so vsa polja zasedena
+        if (gameController.cubeBoxesList[parent].GetComponent<CubeBox>().zasedenoDoKonca()) {
+            gameController.cubeBoxesList[parent].GetComponent<CubeBox>().stanje = 3;
+            Debug.Log("Zasedeno");
         }
 
         if (gameController.konecPotez()) {
